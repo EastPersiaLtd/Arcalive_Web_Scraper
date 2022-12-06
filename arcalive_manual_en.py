@@ -39,13 +39,13 @@ class desc2:
 
 class inputs:
     def __init__(self):
-        self.first_ko=print('아카라이브 웹 스크래퍼 1.0.3입니다.\n\n주요 채널 목록은 아래와 같습니다.\n\n원신/genshin:  6400p/month\n블루아카이브/bluearchive:  4500p/month\n붕괴3rd/hk3rd:  2400p/month\n카운터사이드/counterside:  2000p/month\n던전앤파이터/dunfa:  1800p/month\n명일방주/arknights:  1600p/month\n라스트오리진/lastorigin:  900p/month\n벽람항로/azurlane:  750p/month\n프린세스 커넥트 Re:Dive/prcn:  300p/month\n')
-        self.channelk0=input('채널의 주소를 영문으로 입력하세요; https://arca.live/b/(채널 주소): ')
-        self.nk0=input('크롤링할 페이지의 범위를 입력하세요; 최근 n 페이지만큼-> n: ')
+        self.first_ko=0
+        self.channelk0=0
+        self.nk0=0
         #####
-        self.first_en=0
-        self.channele0=0
-        self.ne0=0
+        self.first_en=print('Arcalive Web Scraper 1.0.3.\n\nHere is the list of major channels as it follows.\n\nGenshin Project/genshin:  6400p/month\nBlue Archive/bluearchive:  4500p/month\nHonkai 3rd/hk3rd:  2400p/month\nCounterside/counterside:  2000p/month\nDNF/dunfa:  1800p/month\nArknights/arknights:  1600p/month\nLast Origin/lastorigin:  900p/month\nAzur Lane/azurlane:  750p/month\nPrincess Connect Re:Dive/prcn:  300p/month\n')
+        self.channele0=input('Please input the channel address; https://arca.live/b/(channel address): ')
+        self.ne0=input('Choose the range of pages you want to scrap; Collect the latest n pages -> n: ')
 #####
     
     def first(self):
@@ -53,10 +53,10 @@ class inputs:
         self.first_kox=self.first_ko
 
     def channelx1(self):
-        self.channelx1=self.channelk0
+        self.channelx1=self.channele0
 
     def nx1(self):
-        self.nx1=self.nk0
+        self.nx1=self.ne0
 
     #def printinp(self):
         #print(f'{inputs.channelx1} 채널입니다. {inputs.nx1} 페이지 만큼 찾습니다.')
@@ -78,7 +78,7 @@ creation_date=str(time.strftime('%Y-%m-%d-%H-%M', time.localtime(time.time())))
 
 #####Clause 1-1: General Channel
 if channel!='live':
-    desc1.second_normal()
+    desc2.second_normal()
     for i in range(n):
         url=f'https://arca.live/b/{channel}?p={i+1}'
         #####
@@ -97,7 +97,7 @@ if channel!='live':
 
 #####Clause 1-2: Best Live Channel
 elif channel=='live':
-    desc1.second_best()
+    desc2.second_best()
     for i in range(n):
         url=f'https://arca.live/b/{channel}?p={i+1}'
         #####
@@ -123,4 +123,4 @@ df=df.replace(r'\n', '', regex=True)
 df.to_csv(f'arcalive_{channel}_page_{n}_{creation_date}.csv', index=False, encoding="utf-8-sig")
 
 #####Finished
-desc1.finished()
+desc2.finished()
