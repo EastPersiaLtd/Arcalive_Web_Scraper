@@ -1,6 +1,4 @@
-#@title TEST B
-#####1.0.3
-
+#@title TEST A
 !pip install bs4 pandas
 
 ##########Import Packages
@@ -13,72 +11,76 @@ import time
 post_title=[]
 post_unique=[]
 
-class desc1:
-    def second_normal(self):
-        print('일반 채널을 선택하셨습니다.')
-    
-    def second_best(self):
-        print('베스트 라이브 채널을 선택하셨습니다.')
+KO_KR=['KO-KR', 'KO-kr', 'Ko-Kr', 'Ko-kr', 'ko-Kr', 'ko-KR', 'ko-kr', 'KR', 'kr', 'Korea', 'Korean', 'korea', 'korean', 'Hangeul', 'hanguel', '한국어', '한글', '한국말', 'gksrnrdj', 'gksrmf', 'gksrnrakf']
+EN_GB=['EN-GB', 'EN-gb', 'En-Gb', 'En-gb', 'en-Gb', 'en-GB', 'en-gb', 'EN-US', 'en-us', 'English', 'english', 'ENG', 'eng', 'not american']
 
-    def finished(self):
-        print(f'arcalive_{channel}_page_{n}_{creation_date}.csv의 저장이 완료되었습니다.')
-        print(f'아카라이브 {channel} 채널의 최근 {n} 페이지 데이터 수집이 완료되었습니다.\n제작자: EastPersiaLtd\n')
-#####
+version=(f'1.0.4')
 
-class desc2:
-    def second_normal(self):
-        print('You have selected a normal channel.')
-    
-    def second_best(self):
-        print('You have selected the Best Live channel.')
-
-    def finished(self):
-        print(f'Saving arcalive_{channel}_page_{n}_{creation_date}.csv has completed.')
-        print(f'Data collecting of Arcalive {channel} channels latest {n} page(s) has completed.\nCredit: EastPersiaLtd\n')
-#####
-
-class inputs:
-    def __init__(self):
-        self.first_ko=print('아카라이브 웹 스크래퍼 1.0.3입니다.\n\n주요 채널 목록은 아래와 같습니다.\n\n원신/genshin:  6400p/month\n블루아카이브/bluearchive:  4500p/month\n붕괴3rd/hk3rd:  2400p/month\n카운터사이드/counterside:  2000p/month\n던전앤파이터/dunfa:  1800p/month\n명일방주/arknights:  1600p/month\n라스트오리진/lastorigin:  900p/month\n벽람항로/azurlane:  750p/month\n프린세스 커넥트 Re:Dive/prcn:  300p/month\n')
-        self.channelk0=input('채널의 주소를 영문으로 입력하세요; https://arca.live/b/(채널 주소): ')
-        self.nk0=input('크롤링할 페이지의 범위를 입력하세요; 최근 n 페이지만큼-> n: ')
-        #####
-        self.first_en=0
-        self.channele0=0
-        self.ne0=0
-#####
-    
+class description:
     def first(self):
-        self.first_enx=self.first_en
-        self.first_kox=self.first_ko
+        if lingua in KO_KR:
+            print(f'아카라이브 웹 스크래퍼 {version}입니다.\n주요 채널 목록은 아래와 같습니다.\n')
+            print(f'베스트 라이브/live: 45p/month')
+            print(f'원신/genshin:  6400p/month\n블루아카이브/bluearchive:  4500p/month\n붕괴3rd/hk3rd:  2400p/month')
+            print(f'카운터사이드/counterside:  2000p/month\n던전앤파이터/dunfa:  1800p/month\n명일방주/arknights:  1600p/month')
+            print(f'라스트오리진/lastorigin:  900p/month\n벽람항로/azurlane:  750p/month\n프린세스 커넥트 Re:Dive/prcn:  300p/month\n')
 
-    def channelx1(self):
-        self.channelx1=self.channelk0
+        elif lingua in EN_GB:
+            print(f'Arcalive Web Scraper {version}.\nHere is the list of major channels as it follows.\n')
+            print(f'Best Live/live: 45p/month')
+            print(f'Genshin Project/genshin:  6400p/month\nBlue Archive/bluearchive:  4500p/month\nHonkai 3rd/hk3rd:  2400p/month')
+            print(f'Counterside/counterside:  2000p/month\nDNF/dunfa:  1800p/month\nArknights/arknights:  1600p/month')
+            print(f'Last Origin/lastorigin:  900p/month\nAzur Lane/azurlane:  750p/month\nPrincess Connect Re:Dive/prcn:  300p/month\n')
 
-    def nx1(self):
-        self.nx1=self.nk0
+    def second_normal(self):
+        if lingua in KO_KR:
+            print(f'\n일반 채널을 선택하셨습니다.\n')
 
-    #def printinp(self):
-        #print(f'{inputs.channelx1} 채널입니다. {inputs.nx1} 페이지 만큼 찾습니다.')
+        elif lingua in EN_GB:
+            print(f'\nYou have selected a normal channel.\n')
+    
+    def second_live(self):
+        if lingua in KO_KR:
+            print(f'\n베스트 라이브 채널을 선택하셨습니다.\n')
+
+        elif lingua in EN_GB:
+            print(f'\nYou have selected the Best Live channel.\n')
+
+    def finished(self):
+        df.info()
+        if lingua in KO_KR:
+            print(f'\narcalive_{channel}_page_{n}_{creation_date}.csv의 저장이 완료되었습니다.')
+            print(f'아카라이브 {channel} 채널의 최근 {n} 페이지 데이터 수집이 완료되었습니다.\n제작자: EastPersiaLtd\n')
+
+        elif lingua in EN_GB:
+            print(f'\nSaving arcalive_{channel}_page_{n}_{creation_date}.csv has completed.')
+            print(f'Data collecting of Arcalive {channel} channels latest {n} page(s) has completed.\nCredit: EastPersiaLtd\n')
 #####
-
 #####
-desc1=desc1()
-desc2=desc2()
-inputs=inputs()
+desc=description()
 
 #####Select Channel
-inputs.channelx1()
-channel=inputs.channelx1
+lingua=str(input(f'사용할 언어를 고르세요/Select the language you want. KO_KR / EN_GB: '))
 #####
-inputs.nx1()
-n=int(inputs.nx1)
+
+if lingua in KO_KR:
+    print('한국어를 고르셨습니다.\n')
+    desc.first()
+    channel=str(input(f'채널의 주소를 영문으로 입력하세요; https://arca.live/b/(채널 주소): '))
+    n=int(input(f'\n스크래핑할 페이지의 범위를 입력하세요; 최근 n 페이지만큼-> n: '))
+
+elif lingua in EN_GB:
+    desc.first()
+    print('You chosen english.\n')
+    channel=str(input(f'Please input the channel address; https://arca.live/b/(channel address): '))
+    n=int(input(f'\nChoose the range of pages you want to scrap; Collect the latest n pages -> n: '))
+
 #####
 creation_date=str(time.strftime('%Y-%m-%d-%H-%M', time.localtime(time.time())))
 
 #####Clause 1-1: General Channel
 if channel!='live':
-    desc1.second_normal()
+    desc.second_normal()
     for i in range(n):
         url=f'https://arca.live/b/{channel}?p={i+1}'
         #####
@@ -97,7 +99,7 @@ if channel!='live':
 
 #####Clause 1-2: Best Live Channel
 elif channel=='live':
-    desc1.second_best()
+    desc.second_live()
     for i in range(n):
         url=f'https://arca.live/b/{channel}?p={i+1}'
         #####
@@ -123,4 +125,4 @@ df=df.replace(r'\n', '', regex=True)
 df.to_csv(f'arcalive_{channel}_page_{n}_{creation_date}.csv', index=False, encoding="utf-8-sig")
 
 #####Finished
-desc1.finished()
+desc.finished()
