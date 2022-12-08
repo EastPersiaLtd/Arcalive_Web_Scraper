@@ -12,8 +12,9 @@ import sys
 import time
 from wordcloud import WordCloud, STOPWORDS
 
-KO_KR=['KO-KR', 'KO-kr', 'Ko-Kr', 'Ko-kr', 'ko-Kr', 'ko-KR', 'ko-kr', 'KR', 'kr', 'Korea', 'Korean', 'korea', 'korean', 'Hangeul', 'hanguel', '한국어', '한글', '한국말', 'gksrnrdj', 'gksrmf', 'gksrnrakf']
-EN_GB=['EN-GB', 'EN-gb', 'En-Gb', 'En-gb', 'en-Gb', 'en-GB', 'en-gb', 'EN-US', 'en-us', 'English', 'english', 'ENG', 'eng', 'not american']
+KO_KR=['KO_KR', 'ko_kr', 'KO-KR', 'KO-kr', 'Ko-Kr', 'Ko-kr', 'ko-Kr', 'ko-KR', 'ko-kr', 'KR', 'kr', 'Korea', 'Korean', 'korea', 'korean', 'Hangeul', 'hanguel',
+'한국어', '한글', '한국말', 'gksrnrdj', 'gksrmf', 'gksrnrakf']
+EN_GB=['EN_GB', 'en_gb', 'EN-GB', 'EN-gb', 'En-Gb', 'En-gb', 'en-Gb', 'en-GB', 'en-gb', 'EN-US', 'en-us', 'English', 'english', 'ENG', 'eng', 'not american']
 
 version=(f'1.0.4')
 
@@ -104,7 +105,7 @@ class desc3:
 desc3=desc3()
 
 #####Choose a language
-lingua=str(input(f'사용할 언어를 고르세요/Select the language you want. KO_KR / EN_GB: '))
+lingua=str(input(f'사용할 언어를 고르세요/Select the language you want. KO-KR / EN-GB: '))
 
 desc3.first()
 #####

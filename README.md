@@ -1,18 +1,18 @@
 # Basic Information
 
 ## English(EN-GB)
-08/12/2022
+09/12/2022
 
-1.0.4
+1.0.5
 
 This is the Arcalive Web Scraper for Python.
 
 Change:
 
-1. Added EN-GB descriptions for all of three active files.
+1. Adopted multi-line print.
 
 There are four options available:
-1. Manual Web Scaper(arcalive_manual_en.py)
+1. Manual Web Scaper(arcalive_manual.py)
 1. Full Automatic Web Scaper + NLP-K Wordcloud(arcalive_automatic.py)
 1. Manual NLP-K Wordcloud(nlp_k_wordcloud.py)
 1. Experimental(yf2203_experimental.py)
@@ -25,19 +25,19 @@ Automatic Wordcloud generation added: execute through 'arcalive_automatic.py'
 
 Q. HOW TO EXECUTE?
 
-A. example) python3 arcalive_manual_en.py
+A. example) python3 arcalive_manual.py
 
 -EastPersiaLtd
 
 ## Korean(KO-KR)
-2022/12/08
+09/12/2022
 
-1.0.4
+1.0.5
 
 Python용 아카라이브 웹 스크래퍼입니다.
 
 체인지:
-1. 유효 파일 3개에 EN-GB 설명을 추가했습니다.
+1. 멀티 라인 print를 도입했습니다.
 
 총 4개의 옵션이 있습니다:
 1. 수동 웹 스크래퍼(arcalive_manual.py)
