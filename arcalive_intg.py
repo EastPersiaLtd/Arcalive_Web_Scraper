@@ -1,17 +1,12 @@
-#@title TEST B
+#@title TEST A
 
-!pip install bs4 konlpy matplotlib pandas wordcloud
+!pip install bs4 pandas
 
 ##########Import Packages
 from bs4 import BeautifulSoup
-from collections import Counter
-from konlpy.tag import Okt
-import matplotlib.pyplot as plt
-import os
 import pandas as pd
 import requests
 import time
-from wordcloud import WordCloud, STOPWORDS
 
 #####Create the lists
 post_title=[]
@@ -44,7 +39,6 @@ class description:
 벽람항로/azurlane:  750p/month
 프린세스 커넥트 Re:Dive/prcn:  300p/month
 ''')
-
         elif lingua in EN_GB:
             print(f'''
 You chosen english.
@@ -70,7 +64,6 @@ Princess Connect Re:Dive/prcn:  300p/month
             print(f'''
 일반 채널을 선택하셨습니다.
 ''')
-
         elif lingua in EN_GB:
             print(f'''
 You have selected a normal channel.
@@ -81,7 +74,6 @@ You have selected a normal channel.
             print(f'''
 베스트 라이브 채널을 선택하셨습니다.
 ''')
-
         elif lingua in EN_GB:
             print(f'''
 You have selected the Best Live channel.
@@ -96,13 +88,22 @@ arcalive_{channel}_page_{n}_{creation_date}.csv가 저장되었습니다.
 
 제작자: EastPersiaLtd
 ''')
-
         elif lingua in EN_GB:
             print(f'''
 Saving arcalive_{channel}_page_{n}_{creation_date}.csv has completed.
 Data collecting of Arcalive {channel} channels latest {n} page(s) has(have) finished.
 
 Credit: EastPersiaLtd
+''')
+
+    def limitation(self):
+        if lingua in KO_KR:
+            print(f'''
+최대 10000 페이지 까지만 검색이 가능합니다. {pre_page} -> 10000
+''')
+        elif lingua in EN_GB:
+            print(f'''
+You can not search for greater than 1000 pages. {pre_page} -> 10000
 ''')
 
 class desc3:
@@ -112,7 +113,6 @@ class desc3:
 NLP-K WordCloud 한국어 스크립트 {version}입니다.
 NLP-K WordCloud용 스프레드시트 셀렉터를 실행합니다.
 ''')
-
         elif lingua in EN_GB:
             print(f'''
 NLP-K WordCloud script {version} for English.
@@ -124,7 +124,6 @@ Execute spreadsheet selector for NLP-K WordCloud...
             print(f'''
 이 파일은 {type1} 형식입니다.
 ''')
-
         elif lingua in EN_GB:
             print(f'''
 This file is {type1} format.
@@ -135,7 +134,6 @@ This file is {type1} format.
             print(df.columns,'''
 파일의 칼럼 리스트입니다.
 ''')
-
         elif lingua in EN_GB:
             print(df.columns,'''
 Here is a coloumn list of the file.
@@ -146,7 +144,6 @@ Here is a coloumn list of the file.
             print(f'''
 준비가 완료되었습니다.
 ''')
-
         elif lingua in EN_GB:
             print(f'''
 Preperation has completed.
@@ -174,7 +171,6 @@ CMRmap/cubehelix/gnuplot/gnuplot2
 hsv/brg/gist_rainbow/rainbow/jet
 turbo/nipy_spectral/gist_ncar
 ''')
-
         elif lingua in EN_GB:
             print(f'''
 NLP-K WordCloud Wizard {version}.
@@ -201,7 +197,6 @@ turbo/nipy_spectral/gist_ncar
             print(f'''
 지정된 경로의 폰트를 사용합니다.
 ''')
-
         elif lingua in EN_GB:
             print(f'''
 Use custom font on the path.
@@ -212,7 +207,6 @@ Use custom font on the path.
             print(f'''
 커스텀 폰트를 사용하지 않습니다. 경고: 차트가 깨질 수 있습니다.
 ''')
-
         elif lingua in EN_GB:
             print(f'''
 Not using custom font. WARNING: CHART WILL NOT DISPLAY CLEARLY.
@@ -227,7 +221,6 @@ NLP-K WordCloud 생성이 끝났습니다.
 제작자: EastPersiaLtd
 
 ''')
-
         elif lingua in EN_GB:
             print(f'''
 Saving nlp_k_wordcloud_arcalive_{channel}_page_{n}_{creation_date}.png has completed.
@@ -236,7 +229,26 @@ Generating a NLP-K WordCloud chart has finished.
 Credit: EastPersiaLtd
 
 ''')
+
+    def terminate(self):
+        if lingua in KO_KR:
+            print(f'''
+스크립트를 종료합니다.
+''')
+        elif lingua in EN_GB:
+            print(f'''
+Script has terminated.
+''')
 #####
+
+#####Limitation on search page range
+def limits(i):
+    if i>10000:
+        i:int=i-(i-10000)
+        return i
+    elif i<=10000:
+        i:int=i
+        return i
 
 #####
 desc=description()
@@ -257,6 +269,14 @@ if lingua in KO_KR:
     n=int(input(f'''
 스크래핑할 페이지의 범위를 입력하세요; 최근 n 페이지만큼-> n: 
 '''))
+#####
+    pre_n=n
+    n=limits(n)
+    desc.limitation()
+#####
+    auto=int(input(f'''
+Wordcloud 자동 생성을 활성화하시겠습니까?(KO-KR 폰트 필요) 0=아니오 / 1=네: 
+'''))
 
 elif lingua in EN_GB:
     desc.first()
@@ -266,6 +286,14 @@ Please input the channel address; https://arca.live/b/(channel address):
 #####
     n=int(input(f'''
 Choose the range of pages you want to scrap; Collect the latest n pages -> n: 
+'''))
+#####
+    pre_n=n
+    n=limits(n)
+    desc.limitation()
+#####
+    auto=int(input(f'''
+Activate automatic Wordcloud generation?(KO-KR font required) 0=No / 1=Yes: 
 '''))
 
 #####
@@ -324,118 +352,129 @@ df.to_csv(
 #####Finished
 desc.finish_phrase()
 
+##########NLP-K
+if auto==1:
+    !pip install konlpy matplotlib wordcloud
 
-##########Wordcloud
-desc3.first()
-#####
+    #####Import Packages
+    from collections import Counter
+    from konlpy.tag import Okt
+    import matplotlib.pyplot as plt
+    import os
+    from wordcloud import WordCloud, STOPWORDS
 
-desc3.third()
-#####
+    #####Wordcloud
+    desc3.first()
+    #####
 
-if lingua in KO_KR:
-    column1=str(input('''
+    desc3.third()
+    #####
+
+    if lingua in KO_KR:
+        column1=str(input('''
 Wordcloud로 만들 칼럼을 지정해주세요(따옴표 생략): 
 '''))
-
-elif lingua in EN_GB:
-    column1=str(input('''
+    elif lingua in EN_GB:
+        column1=str(input('''
 Select the column for generating a Wordcloud chart(You may ignore the inverted commas): 
 '''))
-#####
+    #####
 
-datas=df[column1].to_list()
-#####
+    datas=df[column1].to_list()
+    #####
 
-desc3.fourth()
-#####
+    desc3.fourth()
+    #####
 
 
-#####Customisation
-desc3.fifth()
+    #####Customisation
+    desc3.fifth()
+    #####
+    #number=int(input('이 글자 수 미만의 단어는 포함되지 않습니다(정수로 입력): '))
+    #title=str(input('차트의 타이틀을 입력해주세요: '))
+
 #####
-#number=int(input('이 글자 수 미만의 단어는 포함되지 않습니다(정수로 입력): '))
-#title=str(input('차트의 타이틀을 입력해주세요: '))
-if lingua in KO_KR:
-    cmap=str(input('''
+    if lingua in KO_KR:
+        cmap=str(input('''
 차트에 사용될 컬러맵을 골라주세요: 
 '''))
-
-elif lingua in EN_GB:
-    cmap=str(input('''
-Select a colourmap for the chart: 
-'''))
-#####
-if lingua in KO_KR:
-    font_custom=str(input('''
+        font_custom=str(input('''
 차트에 사용하고 싶은 폰트의 위치를 입력하세요: 
 '''))
-
-elif lingua in EN_GB:
-    font_custom=str(input('''
+    elif lingua in EN_GB:
+        cmap=str(input('''
+Select a colourmap for the chart: 
+'''))
+        font_custom=str(input('''
 Select the path of custom font for the chart: 
 '''))
+#####
 
-font_check=bool(font_custom)
+    font_check=bool(font_custom)
 
-#####Clause 2-1: Generate the chart w/ custom font
-if font_check==True:
-    desc3.sixth_custom()
-    #####
-    text="".join(map(str, datas))
-    okt=Okt()
-    nouns=okt.nouns(text)
-    words=[n for n in nouns if len(n)>1]
-    counting=Counter(words)
-    #####
-    wc=WordCloud(
-        font_path=font_custom,
-        width=1600,
-        height=900,
-        scale=2.0,
-        max_font_size=500,
-        prefer_horizontal=True,
-        colormap=cmap,
-        background_color='mintcream',
-    )
+    #####Clause 2-1: Generate the chart w/ custom font
+    if font_check==True:
+        desc3.sixth_custom()
+        #####
+        text="".join(map(str, datas))
+        okt=Okt()
+        nouns=okt.nouns(text)
+        words=[n for n in nouns if len(n)>1]
+        counting=Counter(words)
+        #####
+        wc=WordCloud(
+            font_path=font_custom,
+            width=1600,
+            height=900,
+            scale=2.0,
+            max_font_size=500,
+            prefer_horizontal=True,
+            colormap=cmap,
+            background_color='mintcream',
+        )
 
-#####Clause 2-2: Generate the chart w/o custom font
-elif font_check==False:
-    desc3.sixth_noncustom()
-    #####
-    text="".join(map(str, datas))
-    okt=Okt()
-    nouns=okt.nouns(text)
-    words=[n for n in nouns if len(n)>1]
-    counting=Counter(words)
-    #####
-    wc=WordCloud(
-        width=1600,
-        height=900,
-        scale=2.0,
-        max_font_size=500,
-        prefer_horizontal=True,
-        colormap=cmap,
-        background_color='mintcream',
-    )
+    #####Clause 2-2: Generate the chart w/o custom font
+    elif font_check==False:
+        desc3.sixth_noncustom()
+        #####
+        text="".join(map(str, datas))
+        okt=Okt()
+        nouns=okt.nouns(text)
+        words=[n for n in nouns if len(n)>1]
+        counting=Counter(words)
+        #####
+        wc=WordCloud(
+            width=1600,
+            height=900,
+            scale=2.0,
+            max_font_size=500,
+            prefer_horizontal=True,
+            colormap=cmap,
+            background_color='mintcream',
+        )
 
-#####Creation
-gen=wc.generate_from_frequencies(counting)
+    #####Creation
+    gen=wc.generate_from_frequencies(counting)
 
-#####Showing the chart
-plt.figure(figsize=(16, 9))
-plt.imshow(gen)
-#plt.title(title, fontsize=30)
-plt.axis('off')
+    #####Showing the chart
+    plt.figure(figsize=(16, 9))
+    plt.imshow(gen)
+    #plt.title(title, fontsize=30)
+    plt.axis('off')
 
-#####Save the chart
-plt.savefig(f'nlp_k_wordcloud_arcalive_{channel}_page_{n}_{creation_date}.png')
+    #####Save the chart
+    plt.savefig(f'nlp_k_wordcloud_arcalive_{channel}_page_{n}_{creation_date}.png')
 
-#####Show the chart
-plt.show()
+    #####Show the chart
+    plt.show()
 
-#####Finished 2
-desc3.finished()
+    #####Finished 2
+    desc3.finished()
 
+else:
+    desc3.terminate()
+
+#####
 #sync=int(input('구글 드라이브와 연동하시겠습니까? 0: 아니오 / 1: 예'))
 #if sync==1:
 #    print('구글 드라이브와 연동합니다.')
